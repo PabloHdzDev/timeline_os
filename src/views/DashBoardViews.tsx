@@ -191,34 +191,36 @@ export default function DashBoardView() {
                 {timelineData.map((event, index) => (
                     <motion.div
                         key={index}
-                        initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.5, delay: index * 0.2 }}
-                        className={`flex justify-center ${index % 2 === 0 ? 'md:justify-start' : 'md:justify-end'} mb-8`}
+                        layout
+                        initial={{ opacity: 0, x: index % 2 === 0 ? -15 : 15, y: 30 }}
+                        whileInView={{ opacity: 1, x: 0 , y: 0 }}
+                        viewport={{ once: true,  amount: 0.05, margin:  "0px 0px -20px 0px" }}
+                        transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+                        className={`relative flex justify-center ${index % 2 === 0 ? 'md:justify-start' : 'md:justify-end'} mb-8`}
                     >
                         <div className="w-11/12 sm:w-11/12 md:w-1/2 px-2 sm:px-10 relative">
+                            {/* Punto de la línea de tiempo */}
                             <div 
-                                className={`absolute top-1/3 w-10 h-10 hidden sm:block sm:left-6 -translate-x-full ${
+                                className={`absolute top-2 md:top-10 w-10 h-10 hidden sm:block sm:left-[-18px] ${
                                     index % 2 === 0 
-                                    ? 'md:left-auto md:right-[-60px] md:-translate-x-full' 
-                                    : 'md:left-5 md:-translate-x-full'
+                                    ? 'md:left-full md:-translate-x-1/2' 
+                                    : 'md:left-[-40px] md:translate-x-1/2'
                                 } rounded-full bg-second border-4 border-first`}
-                            >
-                            </div>
-                            <div className={`hidden md:block absolute top-1/3 left-[-135px] translate-x-1/2 ${
+                            />
+                            { /*Año*/ }
+                            <div className={`hidden md:block absolute top-10 ${
                                     index % 2 === 0 
                                     ? 'md:left-full md:translate-x-1/2' 
-                                    : 'md:left-[-150px] md:translate-x-1/2'
+                                    : 'md:left-[-170px] md:translate-x-1/2'
                                 }`}>
-                                    <p className="text-second font-bold text-3xl">{event.year}</p>
-                                </div>
+                                <p className="text-second font-bold text-3xl">{event.year}</p>
+                            </div>
                             { /*Flecha*/ }
-                            <div className={`absolute top-1/2  ${index % 2 === 0 ? 'md:right-6 md:-translate-x-full md:border-t-8 md:border-b-8 md:border-l-8' : 'left-6 translate-x-full border-t-8 border-b-8 border-r-8'} translate-y-[-35px] w-0 h-0 border-transparent ${index % 2 === 0 ? 'border-l-second' : 'md:border-r-second'}`}></div>
-                            <div className={`md:hidden absolute top-1/2  left-[-10px] sm:left-6 translate-x-full border-t-8 border-b-8 border-r-8 translate-y-[-35px] w-0 h-0 border-transparent border-r-second`}></div>
-                            <p className="md:hidden text-second font-bold text-3xl py-3">{event.year}</p>
+                            <div className={`absolute top-[3.4rem] ${index % 2 === 0 ? 'md:right-7 md:border-t-8 md:border-b-8 md:border-l-8 border-l-second' : 'left-7 border-t-8 border-b-8 border-r-8 md:border-r-second'} w-0 h-0 border-transparent`}></div>
+                            <div className={`md:hidden absolute top-[3.4rem] left-[-10px] sm:left-6 translate-x-full border-t-8 border-b-8 border-r-8 translate-y-[-35px] w-0 h-0 border-transparent border-r-second`}></div>
+                            <p className="md:hidden text-second font-bold text-3xl py-2 ml-2">{event.year || '\u00A0'}</p>
                             
-                            <div className={`bg-third p-6 rounded-lg shadow-lg transform hover:scale-110 hover:sm:scale-105 transition-all duration-300 border-s-2 border-second ${ index%2 === 0 ? 'md:border-e-2 md:border-second md:border-s-0' : 'md:border-s-2 md:border-second' } `}>
+                            <div className={`bg-third p-6 rounded-lg shadow-lg transform hover:translate-y-[-0.5rem]  transition-all duration-300 border-s-2 border-second ${ index%2 === 0 ? 'md:border-e-2 md:border-second md:border-s-0' : 'md:border-s-2 md:border-second' } `}>
                                 {event.image && (
                                     <img
                                         src={event.image}
